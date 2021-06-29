@@ -33,7 +33,7 @@ const SignUp = (props) => {
 
 
     return (
-        <div className="site-card-border-less-wrapper signup-card">
+        <div className="site-card-border-less-wrapper signup-bg signup-card">
             <Card title="SignUp" bordered={false}>
                 <Form name="basic" labelCol={{ span: 24 }} initialValues={{ remember: true, }}
                     onFinish={onFinish}

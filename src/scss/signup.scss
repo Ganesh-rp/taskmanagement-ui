@@ -2,7 +2,6 @@
 
 .signup-card > .ant-card {
     width: 800px;
-    margin: auto;
   }
 
   .signup-btn {
@@ -16,6 +15,8 @@
         text-align: center;
         margin-top: 50px;
       }
-    
+}
+.signup-bg {
+    background-image: url("../assets/images/task.jpg");
 }
   
