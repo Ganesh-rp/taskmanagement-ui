@@ -10,7 +10,7 @@ export const setItem = (name, data) => {
 }
 
 export const getItem = (name) => {
-   return JSON.parse(localStorage.getItem(name));
+    return JSON.parse(localStorage.getItem(name));
 }
 
 export const clearItem = () => {
@@ -21,4 +21,9 @@ export const clearItem = () => {
 export const getPosition = () => {
     const user = getItem('user');
     return user?.position;
+}
+
+export const isLoggedIn = () => {
+    const user = getItem('user');
+    return user;
 }

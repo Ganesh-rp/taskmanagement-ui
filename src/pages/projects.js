@@ -9,6 +9,7 @@ import '../scss/projects.scss'
 
 
 
+
 class Projects extends Component {
   constructor(props) {
     super(props)
@@ -21,8 +22,11 @@ class Projects extends Component {
     loading: true
   };
 
-  componentDidMount() {
+  componentDidMount(props) {
     const position = getPosition();
+    if(!position) {
+     props.history.push('/login')
+    }
     this.setState({ position })
     this.getProjects();
   }
@@ -122,7 +126,6 @@ class Projects extends Component {
       .then(res => {
         if (res.data.success) {
           message.success("Project deleted successfully")
-          console.log('----------res----------', res)
           this.getProjects();
         }
       });

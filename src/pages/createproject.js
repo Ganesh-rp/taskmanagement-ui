@@ -4,8 +4,9 @@ import axios from 'axios';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/Button';
 import CustomDatePicker from '../components/DatePicker';
-import { useQuery } from '../util/helpers'
+import { useQuery, isLoggedIn } from '../util/helpers'
 import moment from 'moment'
+import '../scss/createproject.scss';
 
 
 
@@ -14,9 +15,14 @@ const CreateProject = (props) => {
     const [project, setProject] = useState({});
     const query = useQuery();
     const id = query.get('id');
-    useEffect(() => {
 
-        axios.get(`https://taskmanagement1.herokuapp.com/api/v1/project/${id}`)
+    useEffect(() => {
+        const user = isLoggedIn();
+        if(!user) {
+            props.history.push('/login')
+        }
+        if(id) {
+            axios.get(`https://taskmanagement1.herokuapp.com/api/v1/project/${id}`)
             .then(res => {
                 if (res) {
                     setProject(res.data.data)
@@ -28,6 +34,7 @@ const CreateProject = (props) => {
                     })
                 }
             });
+        }
     }, [])
 
     const onFinish = async (fieldsValue) => {
@@ -62,7 +69,7 @@ const CreateProject = (props) => {
 
     return (
 
-        <div className="site-card-border-less-wrapper signup-card">
+        <div className="site-card-border-less-wrapper create-project-card">
             <Card title="Create Project" bordered={false}>
                 <Form form={form} name="basic" labelCol={{ span: 24 }} initialValues={{ remember: true, }}
                     onFinish={onFinish}

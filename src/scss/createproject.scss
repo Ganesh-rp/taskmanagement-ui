@@ -1,0 +1,14 @@
+@import '../index.scss';
+
+.create-project-card  > .ant-card {
+    width: 800px;
+    margin: auto;
+  } 
+  .create-project-card {
+    .ant-card-head-title {
+        font-size: 25px;
+        text-align: center;
+        margin-top: 50px;
+      }
+}
+

@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Card, message, Col, Row } from 'antd';
+import axios from 'axios';
 import FormInput from '../components/FormInput';
 import FormInputPassword from '../components/FormInputPassword';
 import FormInputConfirmPassword from '../components/FormInputConfirmPassword';
 import FormSelect from '../components/FormSelect';
 import FormButton from '../components/Button';
-import axios from 'axios';
+import { isLoggedIn } from '../util/helpers';
 import '../scss/signup.scss';
 
 
@@ -13,7 +14,13 @@ import '../scss/signup.scss';
 const SignUp = (props) => {
 
     const position = [{ value: "Admin", name: "admin" }, { value: "Manager", name: "manager" }]
-
+    
+    useEffect(() => {
+        const user =  isLoggedIn();
+        if(user) {
+            props.history.push('/project')
+        }
+    }, [])
     const onFinish = async (values) => {
         console.log('Success:', values);
         await axios.post(`https://taskmanagement1.herokuapp.com/api/v1/user`, {

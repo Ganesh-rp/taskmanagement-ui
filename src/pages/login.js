@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Card, message } from 'antd';
 import axios from 'axios';
 import FormInput from '../components/FormInput';
 import FormInputPassword from '../components/FormInputPassword';
 import FormButton from '../components/Button';
-import { setItem } from '../util/helpers';
+import { setItem, isLoggedIn } from '../util/helpers';
 import '../scss/login.scss';
 
 
 
+
 const Login = (props) => {
+
+    useEffect(() => {
+      const user = isLoggedIn();
+      if(user) {
+          props.history.push('/project')
+      }
+    }, [])
 
     const onFinish = async (values) => {
         console.log('Success:', values);
