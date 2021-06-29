@@ -1,0 +1,21 @@
+@import '../index.scss';
+
+.login-card > .ant-card {
+    width: 400px;
+    margin: auto;
+  }
+
+  .login-btn {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px
+  }
+.login-card {
+    .ant-card-head-title {
+        font-size: 35px;
+        text-align: center;
+        margin-top: 50px;
+      }
+    
+}
+  
