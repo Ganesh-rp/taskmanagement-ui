@@ -7,7 +7,6 @@ const FormButton = ({ offset, span, children, classes, ...props }) => {
         if (props?.onClickEvent) {
             props.onClickEvent();
         }
-        console.log('-------------ee-c-------------')
     }
     return (
         <div className={classes}>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Input, Button, Space, Checkbox } from 'antd';
+import { Table, Input, Button, Space, Checkbox, message } from 'antd';
 import axios from 'axios';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined, DeleteOutlined, FormOutlined } from '@ant-design/icons';
@@ -8,33 +8,6 @@ import { getPosition } from '../util/helpers';
 import '../scss/projects.scss'
 
 
-
-// const data = [
-//   {
-//     key: '1',
-//     name: 'John Brown',
-//     age: 32,
-//     address: 'New York No. 1 Lake Park',
-//   },
-//   {
-//     key: '2',
-//     name: 'Joe Black',
-//     age: 42,
-//     address: 'London No. 1 Lake Park',
-//   },
-//   {
-//     key: '3',
-//     name: 'Jim Green',
-//     age: 32,
-//     address: 'Sidney No. 1 Lake Park',
-//   },
-//   {
-//     key: '4',
-//     name: 'Jim Red',
-//     age: 32,
-//     address: 'London No. 2 Lake Park',
-//   },
-// ];
 
 class Projects extends Component {
   constructor(props) {
@@ -144,9 +117,12 @@ class Projects extends Component {
   };
 
   trash = async (id) => {
+    this.setState({loading: true});
     await axios.delete(`https://taskmanagement1.herokuapp.com/api/v1/project/${id}`)
       .then(res => {
-        if (res) {
+        if (res.data.success) {
+          message.success("Project deleted successfully")
+          console.log('----------res----------', res)
           this.getProjects();
         }
       });
@@ -162,14 +138,11 @@ class Projects extends Component {
   }
 
   onChange = async (e, id) => {
-    this.setState({loading: true});
-    console.log('-----------id----------', id)
-     await axios.put(`https://taskmanagement1.herokuapp.com/api/v1/project/${id}`, { projectCompleted: e.target.checked})
-     .then(res => {
-       this.getProjects()
-       console.log('-------------checkboxd-----res---------', res)
-     });
-    // console.log(`checked = ${e.target.checked}${id}`);
+    this.setState({ loading: true });
+    await axios.put(`https://taskmanagement1.herokuapp.com/api/v1/project/${id}`, { projectCompleted: e.target.checked })
+      .then(res => {
+        this.getProjects()
+      });
   }
 
   render() {
@@ -207,19 +180,18 @@ class Projects extends Component {
         key: position === 'Admin' ? 'edit' : 'projectCompleted',
         dataIndex: position === 'Admin' ? 'edit' : 'projectCompleted',
         width: '20%',
-        render: (record, obj) => {
-          console.log('--------resco------', record, obj)
+        render: (record, recordIndex) => {
           return (
             <>
               {position === 'Admin' ?
                 <div className="row">
                   <div className="edit">
-                    <FormOutlined onClick={() => this.edit(record._id)} />
+                    <FormOutlined onClick={() => this.edit(recordIndex._id)} />
                   </div>
                   <div className="trash">
-                    <DeleteOutlined onClick={() => this.trash(record._id)} />
+                    <DeleteOutlined onClick={() => this.trash(recordIndex._id)} />
                   </div>
-                </div> : <div><Checkbox checked={obj.projectCompleted} onChange={(e) => this.onChange(e, obj._id)}></Checkbox></div>
+                </div> : <div><Checkbox checked={recordIndex.projectCompleted} onChange={(e) => this.onChange(e, recordIndex._id)}></Checkbox></div>
               }
             </>
           );
@@ -228,7 +200,9 @@ class Projects extends Component {
     ];
     return (
       <>
-        {position === 'Admin' && <FormButton onClickEvent={this.onClickEvent}>Create Project</FormButton>}
+        {position === 'Admin' &&
+            <FormButton classes="project-btn" onClickEvent={this.onClickEvent}>Create Project</FormButton>
+        }
         <Table
           loading={this.state.loading}
           columns={columns}

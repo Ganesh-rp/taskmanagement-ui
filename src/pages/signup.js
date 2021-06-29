@@ -11,6 +11,9 @@ import '../scss/signup.scss';
 
 
 const SignUp = (props) => {
+
+    const position = [{ value: "Admin", name: "admin" }, { value: "Manager", name: "manager" }]
+
     const onFinish = async (values) => {
         console.log('Success:', values);
         await axios.post(`https://taskmanagement1.herokuapp.com/api/v1/user`, {
@@ -19,7 +22,7 @@ const SignUp = (props) => {
         })
             .then(res => {
                 if (res.data.data) {
-                    message.success("User Successfully Registered");
+                    message.success("User successfully registered");
                     props.history.push('/login')
                 }
             });
@@ -27,10 +30,7 @@ const SignUp = (props) => {
 
     const onFinishFailed = (errorInfo) => {
     };
-    const userTypeChange = (e) => {
-    }
 
-    const hello = [{ value: "Admin", name: "admin" }, { value: "Manager", name: "manager" }]
 
     return (
         <div className="site-card-border-less-wrapper signup-card">
@@ -57,7 +57,7 @@ const SignUp = (props) => {
                     </Row>
                     <Row>
                         <Col span={24}>
-                            <FormSelect label="Position" name="position" options={hello} typeChange={userTypeChange} />
+                            <FormSelect label="Position" name="position" options={position} />
                         </Col>
                     </Row>
                     <div className="text-center">Already have an account?<a href="/login"> Login</a></div>

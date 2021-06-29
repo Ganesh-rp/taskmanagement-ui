@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout } from 'antd';
+import { Layout, Row, Col } from 'antd';
 import { LogoutOutlined } from '@ant-design/icons';
 import { clearItem } from '../util/helpers';
 import '../scss/header.scss'
@@ -14,10 +14,17 @@ const CommonHeader = (props) => {
     }
     return (
         <Header>
-            <div className="row header">
-                <div className="logout">Logout</div>
-                <div onClick={logOut} className="logout_icon"><LogoutOutlined /></div>
-            </div>
+            <Row>
+                <Col span={18} push={6}>
+                    <div className="row header">
+                        <span className="logout">Logout</span>
+                        <span onClick={logOut} className="logout_icon"><LogoutOutlined /></span>
+                    </div>
+                </Col>
+                <Col span={6} pull={18}>
+                    <div className="header-title"> Task Management</div>
+                </Col>
+            </Row>
         </Header>
     )
 }
