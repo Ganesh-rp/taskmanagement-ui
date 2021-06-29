@@ -17,16 +17,16 @@ const Routes = () => {
         <Router history={useHistory()}>
             <Switch>
                 <Route exact path="/" component={Login} />
-                <Route path="/login" component={Login} />
-                <Route path="/signup" component={SignUp} />
+                <Route  path="/login" component={Login} />
+                <Route  path="/signup" component={SignUp} />
                 <Layout>
                     <CommonHeader history={useHistory()} />
                     <Content>
-                        <Route path="/project" component={Project} />
-                        <Route path="/createproject" component={CreateProject} />
+                        <Route  path="/project" component={Project} />
+                        <Route  path="/createproject" component={CreateProject} />
                     </Content>
                 </Layout>
-                <Route path="*" component={NotFound} />
+                <Route  path="*" component={NotFound} />
             </Switch>
         </Router>
     )

@@ -1,18 +1,18 @@
 @import '../index.scss';
 
-.login-card > .ant-card {
-    width: 400px;
+.signup-card > .ant-card {
+    width: 800px;
     margin: auto;
   }
 
-  .login-btn {
+  .signup-btn {
       display: flex;
       justify-content: center;
       margin-top: 20px
   }
-.login-card {
+.signup-card {
     .ant-card-head-title {
-        font-size: 35px;
+        font-size: 25px;
         text-align: center;
         margin-top: 50px;
       }

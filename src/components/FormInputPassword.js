@@ -13,6 +13,7 @@ const FormInputPassword = ({label, name, message}) => {
                     message: message,
                 },
             ]}
+            hasFeedback
         >
             <Input.Password />
         </Form.Item>
